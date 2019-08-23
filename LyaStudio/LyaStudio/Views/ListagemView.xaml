@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:LyaStudio"
+             x:Class="LyaStudio.Views.ListagemView"
+             Title="Lya Veg Estudio">
+
+
+    <StackLayout  x:Name="layout" BackgroundColor="White">
+        <Label Text="Olá, você irá utilizar o studio para gravação ou ensaio?" TextColor="Gray" Margin="25">
+            
+        </Label>   
+        <BoxView HorizontalOptions="FillAndExpand" HeightRequest="15"
+          VerticalOptions="Start" Color="White" />
+
+        <ListView x:Name="listViewStudio" ItemsSource="{Binding Studios}" Margin="25" ItemTapped="ListViewStudio_ItemTapped">
+            <!-- Place new controls here -->
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <Label VerticalOptions="CenterAndExpand" BackgroundColor="White" HorizontalTextAlignment="Center">
+                                <Label.FormattedText>
+                                    <FormattedString >
+                                        <FormattedString.Spans>
+                                            <Span Text="{Binding studioTipo}">
+                                            </Span>
+                                            <Span Text=" - " ></Span>
+                                            <Span Text="{Binding precoFormatado}"></Span>
+                                        </FormattedString.Spans>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

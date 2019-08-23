@@ -144,11 +144,11 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.5"/>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.5" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LyaStudio\LyaStudio.csproj">
-      <Project>{5DA048D5-96AB-4192-9D2D-0D2814E5911C}</Project>
+      <Project>{AB311495-E412-4E11-9DF1-582779D19186}</Project>
       <Name>LyaStudio</Name>
     </ProjectReference>
   </ItemGroup>

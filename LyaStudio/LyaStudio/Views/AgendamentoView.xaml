@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LyaStudio.Views.AgendamentoView"
+             >
+    <ContentPage.Content>
+        <TableView  Intent="Form">
+            <TableRoot>
+                <TableSection Title="Seus dados" >
+                    <EntryCell Label ="Nome:" Placeholder="Seu nome" ></EntryCell>
+                    <EntryCell Label ="Email:" Placeholder="Seu email (Obrigatório)"></EntryCell>
+                    <EntryCell Label ="Celular:" Placeholder="Número do celular/whatsApp" Keyboard="Email"></EntryCell>
+                </TableSection>
+
+                <TableSection Title="Agendamento">
+
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </ContentPage.Content>
+</ContentPage>

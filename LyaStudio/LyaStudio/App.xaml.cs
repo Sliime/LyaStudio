@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LyaStudio;
+using LyaStudio.Views;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +13,7 @@ namespace LyaStudio
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage( new ListagemView());
         }
 
         protected override void OnStart()
