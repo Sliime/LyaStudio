@@ -1,7 +1,6 @@
 ﻿using LyaStudio;
 using LyaStudio.Views;
 using System;
-using System.Net;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,9 +12,12 @@ namespace LyaStudio
         public App()
         {
             InitializeComponent();
-#if DEBUG  
-            HotReloader.Current.Run(this) ;
+
+
+#if DEBUG
+            HotReloader.Current.Run(this);
 #endif
+
             MainPage = new NavigationPage( new ListagemView());
         }
 
