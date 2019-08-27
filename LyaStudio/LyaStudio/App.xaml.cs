@@ -13,6 +13,11 @@ namespace LyaStudio
         {
             InitializeComponent();
 
+
+#if DEBUG
+            HotReloader.Current.Run(this);
+#endif
+
             MainPage = new NavigationPage( new ListagemView());
         }
 
