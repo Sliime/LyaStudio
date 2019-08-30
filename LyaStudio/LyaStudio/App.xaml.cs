@@ -1,6 +1,7 @@
 ﻿using LyaStudio;
 using LyaStudio.Views;
 using System;
+using System.Net;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,7 +16,12 @@ namespace LyaStudio
 
 
 #if DEBUG
-            HotReloader.Current.Run(this);
+            HotReloader.Current.Run(this, new HotReloader.Configuration {
+
+
+                ExtensionIpAddress = IPAddress.Parse("192.168.15.38")
+
+            });
 #endif
 
             MainPage = new NavigationPage( new ListagemView());

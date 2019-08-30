@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using LyaStudio.Models;
+using LyaStudio.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,24 +13,32 @@ namespace LyaStudio.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class DetalheView : ContentPage
 	{
-
         public Studio StudioTipoNome { get; set; }
-
-        public string textoDetalhe { get { return ($"Você irá utilizar o estúdio para {StudioTipoNome.studioTipo}, que irá custar {StudioTipoNome.precoFormatado} "); } }
-        
 
         public DetalheView (Studio servicoNome)
 		{
-           // this.Title = servicoNome.studioTipo;
+            // this.Title = servicoNome.studioTipo;
+            InitializeComponent();
             StudioTipoNome = servicoNome;
-            BindingContext = this;
-			InitializeComponent ();
+            BindingContext = new DetalheViewModel(servicoNome);
 		}
 
-    
-        private void BotaoProximo_Clicked(object sender, EventArgs e)
+
+        protected override void OnAppearing()
         {
-            Navigation.PushAsync(new AgendamentoView(StudioTipoNome));
+            base.OnAppearing();
+            MessagingCenter.Subscribe<Studio>(this, "proximo", (msg) =>
+            {
+                Navigation.PushAsync(new AgendamentoView(msg));
+            });
         }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            MessagingCenter.Unsubscribe<Studio>(this, "proximo");
+            MessagingCenter.Unsubscribe<Studio>(this, "StudioSelecionado");
+        }
+
     }
 }

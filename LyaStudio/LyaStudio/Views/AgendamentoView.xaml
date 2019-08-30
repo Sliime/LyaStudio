@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LyaStudio.Views.AgendamentoView"
-             >
+             Title="{Binding Studio.studioTipo}">
     <StackLayout>
         
 
@@ -29,10 +29,16 @@
                             <TimePicker Time="{Binding HoraAgendamento}"></TimePicker>
                         </StackLayout>
                     </ViewCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" >
+                            <Label  VerticalOptions="Center" Text="Hora:"></Label>
+                            <TimePicker Time="{Binding HoraAgendamentoSaida}"></TimePicker>
+                        </StackLayout>
+                    </ViewCell>
                 </TableSection>
             </TableRoot>
         </TableView>
-        <Button Text="Agendar" Clicked="Button_Clicked"></Button>
+        <Button Text="Agendar" Command="{Binding AgendarCommand}"></Button>
      
     </StackLayout>
 </ContentPage>

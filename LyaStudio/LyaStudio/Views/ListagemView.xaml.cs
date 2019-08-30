@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LyaStudio.Models;
+using LyaStudio.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,43 +9,42 @@ using Xamarin.Forms;
 
 namespace LyaStudio.Views
 {
-    public class Studio
-    {
-        public string studioTipo { get; set; }
-        public  double preco { get; set; }
-        public string precoFormatado { get{
-                return string.Format("R${0}", preco);
-            } }
-
-    }
+   
     public partial class ListagemView : ContentPage
     {
-
-        public List<Studio> Studios { get; set; }
-
+        ListagemViewModel view;
         public ListagemView()
         {
            
-            InitializeComponent();
-
-            this.Studios = new List<Studio>
-            {
-                new Studio { studioTipo = "Gravação", preco = 100.00 },
-                new Studio { studioTipo="Ensaio", preco = 50.00}
-
-            };
-
-
-
-           BindingContext = this;
+           InitializeComponent();
+            this.view = new ListagemViewModel();
+            this.BindingContext = this.view;
+            
         }
 
-        async void ListViewStudio_ItemTapped(object sender, ItemTappedEventArgs e)
+        bool teste;
+        protected async override void OnAppearing()
         {
-            var studio = (Studio)e.Item;
+            
+            base.OnAppearing();
+            MessagingCenter.Subscribe<Studio>(this, "StudioSelecionado", (msg) => {
 
-           await Navigation.PushAsync(new DetalheView(studio));
+                Navigation.PushAsync(new DetalheView(msg));
+            } );
+            if (teste == false)
+            {
+                await this.view.GetStudios();
+                teste = true;
+            }
+            
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            MessagingCenter.Unsubscribe<Studio>(this, "StudioSelecionado");
 
         }
+        
     }
 }

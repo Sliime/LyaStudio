@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using LyaStudio.Models;
+using LyaStudio.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,47 +13,55 @@ namespace LyaStudio.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AgendamentoView : ContentPage
 	{
-        public string Nome { get; set; }
-        public string Email { get; set; }
-        public string Celular { get; set; }
 
-        public DateTime dataAgendamento = DateTime.Today;
-
-        public DateTime DataAgendamento {
-            get
-            {
-                return dataAgendamento;
-            }
-            set {
-
-                dataAgendamento = value;
-
-                }
-            }
-
-
-
-
-
-        public TimeSpan HoraAgendamento { get; set; }
+        public AgendamentoViewModel view;
 
 
         public AgendamentoView (Studio studio)
 		{
-            this.Title = studio.studioTipo;
+            InitializeComponent();
 
-            this.BindingContext = this;
-			InitializeComponent ();
+            this.view = new AgendamentoViewModel(studio);
+            this.BindingContext = this.view;
+			
 		}
 
-        private void Button_Clicked(object sender, EventArgs e)
+
+
+        protected override void OnAppearing()
         {
-            DisplayAlert("Agendamento", 
-         string.Format(@"  
-         Nome: {0}
-         Email: {1}
-         Data: {2}
-         Hora:{3}", Nome, Email, Celular, DataAgendamento.ToString("dd/MM/yyyy")), "Ok" );
+            base.OnAppearing();
+
+            MessagingCenter.Subscribe<Agendamento>(this, "Agendamento", async(msg)  =>
+            {
+                var alerta= await DisplayAlert
+                ("Salvar Agendamento", "Deseja mesmo enviar seu agendamento?", "Sim", "Não");
+
+              if(alerta)
+                {
+                    this.view.SalvaAgendamento();
+                }
+              
+            });
+
+            MessagingCenter.Subscribe<Agendamento>(this, "Sucess", (msg) =>
+            {
+                DisplayAlert("Agendamento", "Agendamento enviado com sucesso", "Ok");
+            });
+
+            MessagingCenter.Subscribe<ArgumentException>(this, "FalhaAgendamento", (msg) =>
+            {
+                DisplayAlert("Horario ocupado ou servidor fora do ar", "Olá, talvez seu horario já esteja ocupado ou o servidor esta com problemas","Ok");
+            });
+
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            MessagingCenter.Unsubscribe<Agendamento>(this, "Agendamento");
+            MessagingCenter.Unsubscribe<Agendamento>(this, "Sucess");
+            MessagingCenter.Unsubscribe<ArgumentException>(this, "FalhaAgendamento");
         }
     }
 }

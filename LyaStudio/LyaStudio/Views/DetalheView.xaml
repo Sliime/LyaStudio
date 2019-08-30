@@ -11,7 +11,7 @@
                 HorizontalOptions="CenterAndExpand" 
                 Margin="15"/>
                        
-            <Button x:Name="botaoProximo" Text="Próximo" Clicked="BotaoProximo_Clicked"></Button>
+            <Button x:Name="botaoProximo" Text="Próximo" Command="{Binding ProximoCommand}"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
