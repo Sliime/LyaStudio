@@ -1,6 +1,9 @@
 # LyaStudio
 
 #Tela inicial, aplicativo funcional mas não esta polido visualmente
+
+![69304772_391730031528051_774739777244102656_n](https://user-images.githubusercontent.com/44802328/64081792-1e049900-ccdc-11e9-8a3c-4987a64bdd58.jpg)
+
 ![1](https://user-images.githubusercontent.com/44802328/63989244-0cda4300-cab6-11e9-81b3-f5dc56ffc485.jpg)
 
 #Segunda Pagina
